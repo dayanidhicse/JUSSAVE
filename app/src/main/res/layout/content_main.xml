@@ -8,13 +8,133 @@
     tools:context="com.dayanidhid.jussave.MainActivity"
     tools:showIn="@layout/activity_main">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_margin = "15dp">
+            <FrameLayout
+                android:id="@+id/my_note"
+                android:layout_width="match_parent"
+                android:layout_height="135dp"
+                android:background="@drawable/card_background"
+                android:layout_marginBottom="15dp">
+
+                <ImageView
+                    app:srcCompat="@drawable/ic_note"
+                    android:layout_marginTop="75dp"
+                    android:alpha=".06"
+                    android:layout_width="114dp"
+                    android:layout_height="114dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="15dp"
+                    android:paddingLeft="15dp">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="16sp"
+                            android:fontFamily="@font/open_sans_semibold"
+                            android:text="@string/my_notes" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/open_sans_bold"
+                            android:textSize="11sp"
+                            android:text="@string/fast_and_easy_access" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:paddingRight="20dp"
+                        android:text="Total : 6" />
+                </LinearLayout>
+            </FrameLayout>
+            <FrameLayout
+                android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="135dp"
+                android:background="@drawable/card_background"
+                android:layout_marginBottom="15dp">
+
+                <ImageView
+                    android:layout_width="114dp"
+                    android:layout_height="114dp"
+                    android:layout_marginTop="70dp"
+                    android:alpha=".06"
+                    app:srcCompat="@drawable/ic_lock" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingTop="15dp"
+                    android:paddingLeft="15dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:fontFamily="@font/open_sans_semibold"
+                        android:text="@string/password"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/open_sans_bold"
+                        android:textSize="11sp"
+                        android:text="@string/secure_protected"/>
+
+                </LinearLayout>
+            </FrameLayout>
+            <FrameLayout
+                android:id="@+id/remainder"
+                android:layout_width="match_parent"
+                android:layout_height="135dp"
+                android:background="@drawable/card_background"
+                android:layout_marginBottom="15dp">
+
+                <ImageView
+                    app:srcCompat="@drawable/ic_alarm_black_24px"
+                    android:layout_marginTop="75dp"
+                    android:alpha=".06"
+                    android:layout_width="114dp"
+                    android:layout_height="114dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingTop="15dp"
+                    android:paddingLeft="15dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:fontFamily="@font/open_sans_semibold"
+                        android:text="@string/remainder"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/open_sans_bold"
+                        android:textSize="11sp"
+                        android:text="@string/birthday_events"/>
+
+                </LinearLayout>
+            </FrameLayout>
+        </LinearLayout>
+    </ScrollView>
 
 </android.support.constraint.ConstraintLayout>

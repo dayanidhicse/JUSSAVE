@@ -19,6 +19,23 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
+
+        <activity
+            android:name=".MyNotes"
+            android:label="@string/title_activity_my_notes"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Secrets"
+            android:label="@string/title_activity_secrets"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Remainders"
+            android:label="@string/title_activity_remainders"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
