@@ -1,9 +1,10 @@
 <resources>
     <string name="app_name">JUSSAVE</string>
+    <string name="action_aboutUs">About Us</string>
     <string name="action_settings">Settings</string>
     <string name="my_notes">My Notes</string>
     <string name="fast_and_easy_access">Fast and Easy Access</string>
-    <string name="password">Password</string>
+    <string name="secrets">Secrets</string>
     <string name="secure_protected">Secure, Protected</string>
     <string name="remainder">Remainder</string>
     <string name="birthday_events">Birthday, Events...</string>

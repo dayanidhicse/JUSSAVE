@@ -17,58 +17,69 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:layout_margin = "15dp">
-            <FrameLayout
-                android:id="@+id/my_note"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="135dp"
+                android:layout_marginBottom="15dp"
                 android:background="@drawable/card_background"
-                android:layout_marginBottom="15dp">
-
-                <ImageView
-                    app:srcCompat="@drawable/ic_note"
-                    android:layout_marginTop="75dp"
-                    android:alpha=".06"
-                    android:layout_width="114dp"
-                    android:layout_height="114dp"/>
-
-                <LinearLayout
+                android:elevation="1dp">
+                <FrameLayout
+                    android:id="@+id/my_note"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="15dp"
-                    android:paddingLeft="15dp">
+                    android:layout_height="135dp"
+                    android:background="?android:attr/selectableItemBackground">
+
+                    <ImageView
+                        app:srcCompat="@drawable/ic_note"
+                        android:layout_marginTop="75dp"
+                        android:alpha=".06"
+                        android:layout_width="114dp"
+                        android:layout_height="114dp"/>
+
                     <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="16sp"
-                            android:fontFamily="@font/open_sans_semibold"
-                            android:text="@string/my_notes" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/open_sans_bold"
-                            android:textSize="11sp"
-                            android:text="@string/fast_and_easy_access" />
-                    </LinearLayout>
-
-                    <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="right"
-                        android:paddingRight="20dp"
-                        android:text="Total : 6" />
-                </LinearLayout>
-            </FrameLayout>
+                        android:paddingTop="15dp"
+                        android:paddingLeft="15dp">
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="16sp"
+                                android:fontFamily="@font/open_sans_semibold"
+                                android:text="@string/my_notes" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/open_sans_bold"
+                                android:textSize="11sp"
+                                android:text="@string/fast_and_easy_access" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="right"
+                            android:paddingRight="20dp"
+                            android:text="Total : 6" />
+                    </LinearLayout>
+                </FrameLayout>
+            </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="135dp"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/card_background"
+            android:elevation="1dp">
             <FrameLayout
                 android:id="@+id/password"
                 android:layout_width="match_parent"
                 android:layout_height="135dp"
-                android:background="@drawable/card_background"
-                android:layout_marginBottom="15dp">
+                android:background="?android:attr/selectableItemBackground">
 
                 <ImageView
                     android:layout_width="114dp"
@@ -89,7 +100,7 @@
                         android:layout_height="wrap_content"
                         android:textSize="16sp"
                         android:fontFamily="@font/open_sans_semibold"
-                        android:text="@string/password"/>
+                        android:text="@string/secrets"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -99,15 +110,22 @@
 
                 </LinearLayout>
             </FrameLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="135dp"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/card_background"
+            android:elevation="1dp">
             <FrameLayout
                 android:id="@+id/remainder"
                 android:layout_width="match_parent"
                 android:layout_height="135dp"
-                android:background="@drawable/card_background"
+                android:background="?android:attr/selectableItemBackground"
                 android:layout_marginBottom="15dp">
 
                 <ImageView
-                    app:srcCompat="@drawable/ic_alarm_black_24px"
+                    app:srcCompat="@drawable/ic_alarm"
                     android:layout_marginTop="75dp"
                     android:alpha=".06"
                     android:layout_width="114dp"
@@ -135,6 +153,7 @@
 
                 </LinearLayout>
             </FrameLayout>
+        </LinearLayout>
         </LinearLayout>
     </ScrollView>
 

@@ -19,7 +19,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         FrameLayout frameLayoutMyNote = (FrameLayout) findViewById(R.id.my_note);
         FrameLayout frameLayoutPassword = (FrameLayout) findViewById(R.id.password);
         FrameLayout frameLayoutRemainder = (FrameLayout) findViewById(R.id.remainder);
