@@ -2,18 +2,18 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:paddingRight="15dp"
     android:paddingLeft="15dp"
     android:paddingTop="15dp"
     android:layout_height="80dp">
     <LinearLayout
-        android:layout_width="60dp"
+        android:layout_width="50dp"
         android:layout_height="match_parent"
         android:gravity="center"
         android:orientation="vertical">
         <ImageView
-            android:layout_width="32dp"
-            android:layout_height="32dp"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginBottom="5dp"
             app:srcCompat="@drawable/ic_update"/>
         <TextView
             android:layout_width="match_parent"
@@ -25,27 +25,38 @@
             android:text="24th May 2017"/>
     </LinearLayout>
     <LinearLayout
-        android:layout_marginLeft="5dp"
-        android:layout_width="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center_vertical"
         android:orientation="vertical">
         <TextView
             android:id="@+id/title"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/open_sans_semibold"
             android:textColor="@color/colorAccent"
             android:textSize="20sp"
+            android:layout_marginBottom="5dp"
+            android:paddingRight="15dp"
             android:text="Permissions"/>
         <TextView
             android:id="@+id/subTitle"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/open_sans_semibold"
             android:textSize="12sp"
             android:alpha="0.5"
+            android:paddingRight="15dp"
             android:textColor="@color/colorAccent"
             android:text="Need to ask permissions for all the repositories for that project, and also. Need"/>
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:alpha="0.25"
+            android:background="@color/colorAccent"/>
     </LinearLayout>
 </LinearLayout>

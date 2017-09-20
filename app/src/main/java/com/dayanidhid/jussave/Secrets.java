@@ -5,18 +5,30 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Secrets extends AppCompatActivity {
+    private RecyclerView recyclerView;
+    private RecyclerViewAdapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_secrets);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.empty);
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         setSupportActionBar(toolbar);
 
         toolbar.setNavigationIcon(R.drawable.ic_back);
@@ -36,6 +48,30 @@ public class Secrets extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        // use this setting to
+        // improve performance if you know that changes
+        // in content do not change the layout size
+        // of the RecyclerView
+        recyclerView.setHasFixedSize(true);
+        // use a linear layout manager
+        mLayoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(mLayoutManager);
+        List<String> input = new ArrayList<>();
+        for (int i = 0; i < 100; i++) {
+            input.add("Test" + i);
+        }// define an adapter
+
+        if(input.isEmpty()){
+            recyclerView.setVisibility(View.GONE);
+            linearLayout.setVisibility(View.VISIBLE);
+        } else{
+            linearLayout.setVisibility(View.GONE);
+            recyclerView.setVisibility(View.VISIBLE);
+        }
+
+        mAdapter = new RecyclerViewAdapter(input);
+        recyclerView.setAdapter(mAdapter);
     }
 
     @Override

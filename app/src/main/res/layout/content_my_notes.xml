@@ -9,6 +9,7 @@
     tools:showIn="@layout/activity_my_notes">
     <LinearLayout
         android:id="@+id/empty"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
@@ -29,7 +30,6 @@
     </LinearLayout>
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"
-        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scrollbars="vertical" />
