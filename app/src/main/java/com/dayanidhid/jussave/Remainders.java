@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,12 +21,13 @@ public class Remainders extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RecyclerViewAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
+    private Toolbar toolbar, toolbarCustom;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_remainders);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         LinearLayout linearLayout = (LinearLayout) findViewById(R.id.empty);
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         setSupportActionBar(toolbar);
@@ -68,6 +70,22 @@ public class Remainders extends AppCompatActivity {
         }
         mAdapter = new RecyclerViewAdapter(input);
         recyclerView.setAdapter(mAdapter);
+        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(this,
+                recyclerView, new RecyclerTouchListener.ClickListener() {
+            @Override
+            public void onClick(View view, final int position) {
+                //Values are passing to activity & to fragment as well
+                Toast.makeText(Remainders.this, "Single Click on position        :"+position,
+                        Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onLongClick(View view, int position) {
+                Toast.makeText(Remainders.this, "Long press on position :"+position,
+                        Toast.LENGTH_LONG).show();
+                onSelectItem();
+            }
+        }));
     }
 
     @Override
@@ -92,6 +110,12 @@ public class Remainders extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void onSelectItem(){
+        toolbarCustom = (Toolbar) findViewById(R.id.toolbarCustom);
+        toolbar.setVisibility(View.GONE);
+        toolbarCustom.setVisibility(View.VISIBLE);
     }
 
 }
