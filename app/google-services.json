@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "745502268878",
+    "project_id": "firebase-jussave"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:745502268878:android:c28df9864a6afaa3",
+        "android_client_info": {
+          "package_name": "com.dayanidhid.jussave"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "745502268878-d02hgeq4fsmaql1ls1k06bqp4tmfr53j.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "745502268878-0iqn5fvqqhnr6816vreuotlv6m05qmvi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dayanidhid.jussave",
+            "certificate_hash": "cc885e4b270cff48e8c76916aa04b9d5f1f51d1a"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC0i23tjndcr-sxvZZDlSZrr_vn2ec-hZ8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
