@@ -58,9 +58,9 @@ public class MyNotes extends AppCompatActivity {
         mLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(mLayoutManager);
         List<String> input = new ArrayList<>();
-        for (int i = 0; i < 100; i++) {
-            input.add("Test" + i);
-        }// define an adapter
+//        for (int i = 0; i < 100; i++) {
+//            input.add("Test" + i);
+//        }// define an adapter
 
         if(input.isEmpty()){
             recyclerView.setVisibility(View.GONE);

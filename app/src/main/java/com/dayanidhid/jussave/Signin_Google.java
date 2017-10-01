@@ -1,6 +1,8 @@
 package com.dayanidhid.jussave;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -35,8 +37,8 @@ import java.util.jar.Attributes;
  */
 
 public class Signin_Google extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
-    SignInButton logbut;
-    Button signoutbut;
+
+
     private static final String TAG = "GoogleActivity";
     private static final int RC_SIGN_IN = 9001;
 
@@ -49,10 +51,21 @@ public class Signin_Google extends AppCompatActivity implements GoogleApiClient.
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState)
     {
+        SharedPreferences sharedpreferences = getSharedPreferences("JUSSAVE_PREF", Context.MODE_PRIVATE);
+        boolean isLog = sharedpreferences.getBoolean("isLogin",false);
+        if(isLog)
+        {
+
+                startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                finish();
+
+        }
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
-        logbut = (SignInButton) findViewById(R.id.sign_in_button);
-        signoutbut = (Button)findViewById(R.id.signoutbut);
+
+
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
@@ -77,18 +90,7 @@ public class Signin_Google extends AppCompatActivity implements GoogleApiClient.
 
             }
         };
-        logbut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                signIn();
-            }
-        });
-        signoutbut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                signOut();
-            }
-        });
+        signIn();
 
     }
 
@@ -102,7 +104,6 @@ public class Signin_Google extends AppCompatActivity implements GoogleApiClient.
     @Override
     public void onStart() {
         super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
         System.out.println("****CURRENT USER " + currentUser);
     }
@@ -119,11 +120,13 @@ public class Signin_Google extends AppCompatActivity implements GoogleApiClient.
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
             if (result.isSuccess()) {
-                // Google Sign In was successful, authenticate with Firebase
+                SharedPreferences sharedpreferences = getSharedPreferences("JUSSAVE_PREF", Context.MODE_PRIVATE);
+
+                SharedPreferences.Editor editor = sharedpreferences.edit();
+
                 GoogleSignInAccount account = result.getSignInAccount();
                 GoogleSignInAccount acct = result.getSignInAccount();
                 String personName = acct.getDisplayName();
@@ -132,13 +135,22 @@ public class Signin_Google extends AppCompatActivity implements GoogleApiClient.
                 String personEmail = acct.getEmail();
                 String personId = acct.getId();
                 Uri personPhoto = acct.getPhotoUrl();
+
+                editor.putString("uname",personName);
+                editor.putString("gmailid",personEmail);
+                editor.putString("familyname",personFamilyName);
+                editor.putString("photourl",personPhoto.toString());
+//                editor.putString("isLogin","yes1");
+                editor.putBoolean("isLogin",true);
+                editor.commit();
+
                 Toast.makeText(getApplicationContext(),"Sucessfully Loged IN AS "+personName ,Toast.LENGTH_LONG).show();
+                //if needed add creds to shared pref
 
                 System.out.println("CREDS ARE "+ personEmail+"\n"+personFamilyName+"\n"+personGivenName+"\n"+personId+"\n"+personName+"\n"+personPhoto);
                 firebaseAuthWithGoogle(account);
             } else {
-                // Google Sign In failed, update UI appropriately
-                // ...
+
                 System.out.println("****Google Sign In failed");
             }
         }
@@ -153,22 +165,19 @@ public class Signin_Google extends AppCompatActivity implements GoogleApiClient.
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-
                             System.out.println("****USER " + user);
                             Toast.makeText(getApplicationContext(),"Sucessfully Loged IN AS "+user,Toast.LENGTH_LONG).show();
                             startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                            finish();
 
                         } else {
-                            // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
                             Toast.makeText(Signin_Google.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
                         }
 
-                        // ...
                     }
                 });
     }

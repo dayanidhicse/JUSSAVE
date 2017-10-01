@@ -5,13 +5,16 @@ android {
     buildToolsVersion "26.0.0"
     defaultConfig {
         applicationId "com.dayanidhid.jussave"
-        minSdkVersion 15
+        minSdkVersion 16
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }
+
+
+
     buildTypes {
         release {
             minifyEnabled false
@@ -33,6 +36,10 @@ dependencies {
     })
     compile 'com.google.firebase:firebase-auth:11.4.0'
     compile 'com.google.android.gms:play-services-auth:11.4.0'
+    compile group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1'
+    compile 'com.github.apl-devs:appintro:v4.2.2'
+
+
 
 }
 apply plugin: 'com.google.gms.google-services'
