@@ -1,4 +1,4 @@
-package com.dayanidhid.jussave;
+package com.dayanidhid.jussave.Secrets;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,17 +8,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.dayanidhid.jussave.MainActivity;
+import com.dayanidhid.jussave.R;
+import com.dayanidhid.jussave.Adapters.RecyclerTouchListener;
+import com.dayanidhid.jussave.Adapters.RecyclerViewAdapter;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class MyNotes extends AppCompatActivity {
+public class Secrets extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RecyclerViewAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -27,11 +31,12 @@ public class MyNotes extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_notes);
+        setContentView(R.layout.activity_secrets);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         LinearLayout linearLayout = (LinearLayout) findViewById(R.id.empty);
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         setSupportActionBar(toolbar);
+
         toolbar.setNavigationIcon(R.drawable.ic_back);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,6 +54,7 @@ public class MyNotes extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
         // use this setting to
         // improve performance if you know that changes
         // in content do not change the layout size
@@ -58,9 +64,9 @@ public class MyNotes extends AppCompatActivity {
         mLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(mLayoutManager);
         List<String> input = new ArrayList<>();
-//        for (int i = 0; i < 100; i++) {
-//            input.add("Test" + i);
-//        }// define an adapter
+        for (int i = 0; i < 100; i++) {
+            input.add("Test" + i);
+        }// define an adapter
 
         if(input.isEmpty()){
             recyclerView.setVisibility(View.GONE);
@@ -69,6 +75,7 @@ public class MyNotes extends AppCompatActivity {
             linearLayout.setVisibility(View.GONE);
             recyclerView.setVisibility(View.VISIBLE);
         }
+
         mAdapter = new RecyclerViewAdapter(input);
         recyclerView.setAdapter(mAdapter);
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(this,
@@ -76,13 +83,13 @@ public class MyNotes extends AppCompatActivity {
             @Override
             public void onClick(View view, final int position) {
                 //Values are passing to activity & to fragment as well
-                Toast.makeText(MyNotes.this, "Single Click on position        :"+position,
+                Toast.makeText(Secrets.this, "Single Click on position        :"+position,
                         Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onLongClick(View view, int position) {
-                Toast.makeText(MyNotes.this, "Long press on position :"+position,
+                Toast.makeText(Secrets.this, "Long press on position :"+position,
                         Toast.LENGTH_LONG).show();
                 onSelectItem();
             }

@@ -1,4 +1,4 @@
-package com.dayanidhid.jussave;
+package com.dayanidhid.jussave.On_Boarding;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
+import com.dayanidhid.jussave.R;
+import com.dayanidhid.jussave.SignIn_Pin.Signin_Google;
 import com.github.paolorotolo.appintro.AppIntro;
 import com.github.paolorotolo.appintro.AppIntroFragment;
 
@@ -55,6 +57,7 @@ public class Tutorials extends AppIntro
         super.onSkipPressed(currentFragment);
         // Do something when users tap on Skip button.n
         startActivity(new Intent(getApplicationContext(),Signin_Google.class));
+        finish();
     }
 
     @Override
@@ -62,6 +65,7 @@ public class Tutorials extends AppIntro
         super.onDonePressed(currentFragment);
         // Do something when users tap on Done button.
         startActivity(new Intent(getApplicationContext(),Signin_Google.class));
+        finish();
     }
 
     @Override

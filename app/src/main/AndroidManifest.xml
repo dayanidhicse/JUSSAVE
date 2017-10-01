@@ -6,6 +6,8 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
 
 
     <application
@@ -15,27 +17,29 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Signin_Google">
+        <activity android:name=".SignIn_Pin.Signin_Google">
             <!--<intent-filter>-->
                 <!--<action android:name="android.intent.action.MAIN" />-->
 
                 <!--<category android:name="android.intent.category.LAUNCHER" />-->
             <!--</intent-filter>-->
         </activity>
-        <activity android:name=".SetSecurity"
+        <activity android:name=".SignIn_Pin.SetSecurity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".SetPin"
+        <activity android:name=".SignIn_Pin.SetPin"
             android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".PIN_Login"
+        <activity android:name=".SignIn_Pin.PIN_Login"
             android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".SplashScreen"
-            android:theme="@style/AppTheme.NoActionBar">
+        <activity android:name=".GetInput.InputNote"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".On_Boarding.SplashScreen"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Tutorials"
+        <activity android:name=".On_Boarding.Tutorials"
             android:theme="@style/AppTheme.NoActionBar">
 
         </activity>
@@ -58,15 +62,15 @@
             android:resource="@array/preloaded_fonts" />
 
         <activity
-            android:name=".MyNotes"
+            android:name=".MyNotes.MyNotes"
             android:label="@string/title_activity_my_notes"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Secrets"
+            android:name=".Secrets.Secrets"
             android:label="@string/title_activity_secrets"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Remainders"
+            android:name=".Reminders.Remainders"
             android:label="@string/title_activity_remainders"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>

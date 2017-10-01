@@ -1,4 +1,4 @@
-package com.dayanidhid.jussave;
+package com.dayanidhid.jussave.Reminders;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +13,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+
+import com.dayanidhid.jussave.MainActivity;
+import com.dayanidhid.jussave.R;
+import com.dayanidhid.jussave.Adapters.RecyclerTouchListener;
+import com.dayanidhid.jussave.Adapters.RecyclerViewAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.dayanidhid.jussave;
+package com.dayanidhid.jussave.On_Boarding;
 
 import android.app.Activity;
 import android.content.Context;
@@ -7,8 +7,9 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
+
+import com.dayanidhid.jussave.MainActivity;
+import com.dayanidhid.jussave.R;
 
 /**
  * Created by subash on 1/10/17.

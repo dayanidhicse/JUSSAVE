@@ -1,5 +1,7 @@
-package com.dayanidhid.jussave;
+package com.dayanidhid.jussave.MyNotes;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -8,31 +10,36 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.dayanidhid.jussave.GetInput.InputNote;
+import com.dayanidhid.jussave.MainActivity;
+import com.dayanidhid.jussave.R;
+import com.dayanidhid.jussave.Adapters.RecyclerTouchListener;
+import com.dayanidhid.jussave.Adapters.RecyclerViewAdapter;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class Secrets extends AppCompatActivity {
+public class MyNotes extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RecyclerViewAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private Toolbar toolbar, toolbarCustom;
+    String userChoosenTask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_secrets);
+        setContentView(R.layout.activity_my_notes);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         LinearLayout linearLayout = (LinearLayout) findViewById(R.id.empty);
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         setSupportActionBar(toolbar);
-
         toolbar.setNavigationIcon(R.drawable.ic_back);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,12 +52,29 @@ public class Secrets extends AppCompatActivity {
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+            public void onClick(View view)
+            {
+                final CharSequence[] items = { "Type Notes", "Camera","Gallery"};
+                AlertDialog.Builder builder = new AlertDialog.Builder(MyNotes.this);
+                builder.setTitle("Add Notes!");
+                builder.setItems(items, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int item)
+                    {
+                        if (items[item].equals("Type Notes")) {
+                            userChoosenTask="Type Notes";
+                            startActivity(new Intent(getApplicationContext(), InputNote.class));
+
+                        } else if (items[item].equals("Camera")) {
+                            userChoosenTask="Camera";
+                        } else if (items[item].equals("Gallery")) {
+                            userChoosenTask="Gallery";
+                        }
+                    }
+                });
+                builder.show();
             }
         });
-
         // use this setting to
         // improve performance if you know that changes
         // in content do not change the layout size
@@ -60,9 +84,9 @@ public class Secrets extends AppCompatActivity {
         mLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(mLayoutManager);
         List<String> input = new ArrayList<>();
-        for (int i = 0; i < 100; i++) {
-            input.add("Test" + i);
-        }// define an adapter
+//        for (int i = 0; i < 100; i++) {
+//            input.add("Test" + i);
+//        }// define an adapter
 
         if(input.isEmpty()){
             recyclerView.setVisibility(View.GONE);
@@ -71,7 +95,6 @@ public class Secrets extends AppCompatActivity {
             linearLayout.setVisibility(View.GONE);
             recyclerView.setVisibility(View.VISIBLE);
         }
-
         mAdapter = new RecyclerViewAdapter(input);
         recyclerView.setAdapter(mAdapter);
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(this,
@@ -79,13 +102,13 @@ public class Secrets extends AppCompatActivity {
             @Override
             public void onClick(View view, final int position) {
                 //Values are passing to activity & to fragment as well
-                Toast.makeText(Secrets.this, "Single Click on position        :"+position,
+                Toast.makeText(MyNotes.this, "Single Click on position        :"+position,
                         Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onLongClick(View view, int position) {
-                Toast.makeText(Secrets.this, "Long press on position :"+position,
+                Toast.makeText(MyNotes.this, "Long press on position :"+position,
                         Toast.LENGTH_LONG).show();
                 onSelectItem();
             }

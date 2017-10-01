@@ -15,6 +15,10 @@ import android.view.MenuItem;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
+import com.dayanidhid.jussave.MyNotes.MyNotes;
+import com.dayanidhid.jussave.Reminders.Remainders;
+import com.dayanidhid.jussave.Secrets.Secrets;
+
 public class MainActivity extends AppCompatActivity {
     private static final int CREDENTIALS_RESULT = 4342;
 

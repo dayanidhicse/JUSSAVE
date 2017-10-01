@@ -1,4 +1,4 @@
-package com.dayanidhid.jussave;
+package com.dayanidhid.jussave.SignIn_Pin;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,6 +10,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.dayanidhid.jussave.MainActivity;
+import com.dayanidhid.jussave.R;
 
 /**
  * Created by subash on 1/10/17.
