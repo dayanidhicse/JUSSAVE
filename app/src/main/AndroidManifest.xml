@@ -35,7 +35,7 @@
         <activity
             android:name=".Remainders"
             android:label="@string/title_activity_remainders"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

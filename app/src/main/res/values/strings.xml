@@ -14,4 +14,5 @@
     <string name="no_secrets">You dont have any secrets</string>
     <string name="title_activity_remainders">Remainders</string>
     <string name="no_remainders">You have no remainders</string>
+    <string name="title_activity_new_remainder">NewRemainder</string>
 </resources>
