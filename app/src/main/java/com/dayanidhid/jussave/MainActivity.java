@@ -1,6 +1,9 @@
 package com.dayanidhid.jussave;
 
+import android.app.KeyguardManager;
+import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -10,8 +13,12 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
+    private static final int CREDENTIALS_RESULT = 4342;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +30,8 @@ public class MainActivity extends AppCompatActivity {
         FrameLayout frameLayoutPassword = (FrameLayout) findViewById(R.id.password);
         FrameLayout frameLayoutRemainder = (FrameLayout) findViewById(R.id.remainder);
 
-        frameLayoutMyNote.setOnClickListener(new View.OnClickListener() {
+        frameLayoutMyNote.setOnClickListener(new View.OnClickListener()
+        {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), MyNotes.class);
@@ -31,11 +39,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        frameLayoutPassword.setOnClickListener(new View.OnClickListener() {
+        frameLayoutPassword.setOnClickListener(new View.OnClickListener()
+        {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), Secrets.class);
-                startActivity(intent);
+//                Intent intent = new Intent(getApplicationContext(), Secrets.class);
+//                startActivity(intent);
+                checkCredentials();
             }
         });
 
@@ -48,7 +58,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        fab.setOnClickListener(new View.OnClickListener()
+        {
             @Override
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
@@ -78,5 +89,37 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+    void checkCredentials()
+    {
+        KeyguardManager keyguardManager = (KeyguardManager) this.getSystemService(Context.KEYGUARD_SERVICE);
+        Intent credentialsIntent = null;
 
+        //credentialsIntent = keyguardManager.createConfirmDeviceCredentialIntent("Password required", "please enter your pattern to receive your token");
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            credentialsIntent=keyguardManager.createConfirmDeviceCredentialIntent("Unlock Secrets","please enter the security confirmation");
+        }
+        if (credentialsIntent != null) {
+            startActivityForResult(credentialsIntent, CREDENTIALS_RESULT);
+        }
+        else {
+
+            //Use this part when the VERSION_CODE is less than API LVL 20
+        }
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        if (requestCode == CREDENTIALS_RESULT) {
+            if(resultCode == RESULT_OK) {
+
+                Toast.makeText(this, "Password Correct", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(), Secrets.class);
+                startActivity(intent);
+            }
+            else {
+                //Todo:handle cancel click
+
+            }
+        }
+    }
 }
