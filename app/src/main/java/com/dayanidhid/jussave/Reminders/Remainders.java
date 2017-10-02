@@ -87,9 +87,13 @@ public class Remainders extends AppCompatActivity implements AlertDialogHelper.A
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                alertDialogHelper.showAlertDialog("","Delete Contact","DELETE","CANCEL",1,false);
-
+                if(multilist.size()>=1) {
+                    alertDialogHelper.showAlertDialog("", "Delete Contact", "DELETE", "CANCEL", 1, false);
+                }
+                else
+                {
+                    alertDialogHelper.showAlertDialog("", "Can't delete,No Selection", "", "Ok", 0, false);
+                }
             }
 
         });
@@ -204,6 +208,8 @@ public class Remainders extends AppCompatActivity implements AlertDialogHelper.A
 //            {
 //                remRecyclerView.selectedlist.
 //            }
+            isMultiSelect=false;
+
             remRecyclerView.notifyDataSetChanged();
 
         }
@@ -259,7 +265,8 @@ public void refreshAdapter()
     }
 
     @Override
-    public void onNeutralClick(int from) {
+    public void onNeutralClick(int from)
+    {
 
     }
     public void toolbarHide()
