@@ -34,7 +34,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             layout = v;
             linearLayout = (LinearLayout) v.findViewById(R.id.textLayout); 
             txtHeader = (TextView) v.findViewById(R.id.title);
-            txtFooter = (TextView) v.findViewById(R.id.subTitle);
+            txtFooter = (TextView) v.findViewById(R.id.Type);
             updateImage = (ImageView) v.findViewById(R.id.update);
         }
     }

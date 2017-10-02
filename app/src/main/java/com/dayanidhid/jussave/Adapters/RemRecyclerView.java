@@ -7,8 +7,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.dayanidhid.jussave.R;
+import com.dayanidhid.jussave.Remainders;
 
 import java.util.ArrayList;
 
@@ -45,7 +47,16 @@ public class RemRecyclerView extends RecyclerView.Adapter<RemRecyclerView.ViewHo
             } else {
                 holder.ll.setBackgroundColor(ContextCompat.getColor(mcontext, R.color.list_item_normal_state));
             }
+//              Code to disable multiple share
+//            if(selectedlist.size()==1)
+//            {
+//                Remainders.share.setVisibility(View.VISIBLE);
+//            }
+//            else {
+//                Remainders.share.setVisibility(View.INVISIBLE);
+//            }
         }
+        holder.title.setText(itemList5.get(position).getName());
     }
 
     @Override
@@ -57,10 +68,12 @@ public class RemRecyclerView extends RecyclerView.Adapter<RemRecyclerView.ViewHo
     static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
     {
         public LinearLayout ll;
+        public TextView title;
         public ViewHolder(View itemView)
         {
             super(itemView);
             ll=(LinearLayout)itemView.findViewById(R.id.linearLayout);
+            title=(TextView)itemView.findViewById(R.id.title);
         }
 
         @Override

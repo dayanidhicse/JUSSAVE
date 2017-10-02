@@ -31,9 +31,10 @@ public class Remainders extends AppCompatActivity implements AlertDialogHelper.A
     private RecyclerView.LayoutManager mLayoutManager;
     private Toolbar toolbar, toolbarCustom;
     private TextView count;
-    private ImageView delete,share;
+   static public ImageView delete,share;
     private ArrayList<RemAdapter> list=new ArrayList<RemAdapter>();
     public ArrayList<RemAdapter> multilist;
+    public StringBuilder stringBuilder;
     boolean status=true;
     boolean isMultiSelect = false;
     RemRecyclerView remRecyclerView;
@@ -47,6 +48,7 @@ public class Remainders extends AppCompatActivity implements AlertDialogHelper.A
         alertDialogHelper =new AlertDialogHelper(this);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         delete=(ImageView)findViewById(R.id.delete);
+        share=(ImageView)findViewById(R.id.share);
         count=(TextView)findViewById(R.id.count);
         LinearLayout linearLayout = (LinearLayout) findViewById(R.id.empty);
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
@@ -59,11 +61,34 @@ public class Remainders extends AppCompatActivity implements AlertDialogHelper.A
                 startActivity(intent);
             }
         });
+        share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                stringBuilder=new StringBuilder();
+                if(multilist!=null)
+                {
+                    for(int i=0;i<multilist.size();i++)
+                    {
+                     stringBuilder.append(""+multilist.get(i).getName()+"\n");
+
+
+                    }
+                    Intent sendIntent = new Intent();
+                    sendIntent.setAction(Intent.ACTION_SEND_MULTIPLE);
+                    sendIntent.putExtra(Intent.EXTRA_TEXT, stringBuilder.toString());
+                    sendIntent.setType("text/*");
+                    startActivity(sendIntent);
+                }
+            }
+        });
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 alertDialogHelper.showAlertDialog("","Delete Contact","DELETE","CANCEL",1,false);
+
             }
+
         });
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -82,10 +107,6 @@ public class Remainders extends AppCompatActivity implements AlertDialogHelper.A
         // use a linear layout manager
         //mLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(new GridLayoutManager(this,2));
-//        List<String> input = new ArrayList<>();
-//        for (int i = 0; i < 100; i++) {
-//            input.add("Test" + i);
-//        }// define an adapter
         for(int i=0;i<100;i++)
         {
             list.add(new RemAdapter("Test:"+i));
@@ -98,9 +119,8 @@ public class Remainders extends AppCompatActivity implements AlertDialogHelper.A
             linearLayout.setVisibility(View.GONE);
             recyclerView.setVisibility(View.VISIBLE);
         }
-        //mAdapter = new RecyclerViewAdapter(input);
+
          remRecyclerView=new RemRecyclerView(this,R.layout.rem_card,list,multilist);
-        //recyclerView.setAdapter(mAdapter);
         recyclerView.setAdapter(remRecyclerView);
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(this,
                 recyclerView, new RecyclerTouchListener.ClickListener() {
@@ -168,14 +188,26 @@ public class Remainders extends AppCompatActivity implements AlertDialogHelper.A
     {
         if(status==false)
         {
-            toolbarCustom = (Toolbar) findViewById(R.id.toolbarCustom);
-            toolbar.setVisibility(View.VISIBLE);
-            toolbarCustom.setVisibility(View.GONE);
-            status=true;
+//            toolbarCustom = (Toolbar) findViewById(R.id.toolbarCustom);
+//            toolbar.setVisibility(View.VISIBLE);
+//            toolbarCustom.setVisibility(View.GONE);
+//            status=true;
+            //startActivity(new Intent(this,Remainders.class));
+            //finish();
+            toolbarHide();
+            remRecyclerView.itemList5=list;
+            remRecyclerView.selectedlist.clear();
+//            for(int i=0;i<multilist.size();i++)
+//            {
+//                remRecyclerView.selectedlist.
+//            }
+            remRecyclerView.notifyDataSetChanged();
+
         }
         else
         {
             super.onBackPressed();
+            finish();
         }
     }
     public void multiselect(int position)
@@ -201,7 +233,20 @@ public void refreshAdapter()
     @Override
     public void onPositiveClick(int from)
     {
-
+        if(from==1)
+        {
+            if(multilist.size()>0)
+            {
+                for(int i=0;i<=multilist.size()-1;i++)
+                {
+                    remRecyclerView.itemList5.remove(multilist.get(i));
+                }
+                remRecyclerView.notifyDataSetChanged();
+                toolbarHide();
+            }
+            multilist.clear();
+            Toast.makeText(this, "Deleted", Toast.LENGTH_SHORT).show();
+        }
 
     }
 
@@ -213,6 +258,13 @@ public void refreshAdapter()
     @Override
     public void onNeutralClick(int from) {
 
+    }
+    public void toolbarHide()
+    {
+            toolbarCustom = (Toolbar) findViewById(R.id.toolbarCustom);
+            toolbar.setVisibility(View.VISIBLE);
+            toolbarCustom.setVisibility(View.GONE);
+            status=true;
     }
 
 }
