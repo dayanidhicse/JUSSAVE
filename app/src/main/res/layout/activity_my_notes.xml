@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.dayanidhid.jussave.MyNotes.MyNotes">
+    tools:context="com.dayanidhid.jussave.notes.MyNotes">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -21,15 +21,55 @@
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbarCustom"
             android:layout_width="match_parent"
-            android:visibility="gone"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" >
+            android:visibility="gone"
+            app:popupTheme="@style/AppTheme.PopupOverlay">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/ic_launcher"/>
+                android:layout_marginTop="3dp"
+                android:src="@mipmap/ic_launcher" />
+
+            <TextView
+                android:id="@+id/count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+
+            <ImageView
+                android:id="@+id/share"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="10dp"
+                android:visibility="visible"
+                app:srcCompat="@android:drawable/ic_menu_share" />
+
+            <ImageView
+                android:id="@+id/delete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginLeft="60dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="10dp"
+                app:srcCompat="@android:drawable/ic_menu_delete" />
+
+        </LinearLayout>
         </android.support.v7.widget.Toolbar>
+
     </android.support.design.widget.AppBarLayout>
 
     <include layout="@layout/content_my_notes" />

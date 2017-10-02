@@ -63,7 +63,7 @@
             android:resource="@array/preloaded_fonts" />
 
         <activity
-            android:name=".MyNotes.MyNotes"
+            android:name=".notes.MyNotes"
             android:label="@string/title_activity_my_notes"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity

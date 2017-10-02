@@ -15,7 +15,7 @@ import android.view.MenuItem;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
-import com.dayanidhid.jussave.MyNotes.MyNotes;
+import com.dayanidhid.jussave.notes.MyNotes;
 import com.dayanidhid.jussave.Reminders.Remainders;
 import com.dayanidhid.jussave.Secrets.Secrets;
 
