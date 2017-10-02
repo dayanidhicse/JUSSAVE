@@ -150,16 +150,19 @@ public class MyNotes extends AppCompatActivity implements AlertDialogHelper.Aler
                     //Values are passing to activity & to fragment as well
                     if (isMultiSelect) {
                         multiselect(position);
-                    } else
-                        Toast.makeText(MyNotes.this, "Single Click on position        :" + position,
-                                Toast.LENGTH_SHORT).show();
+                    } else {
+
+
+//                        Toast.makeText(MyNotes.this, "Single Click on position        :" + position,
+//                                Toast.LENGTH_SHORT).show();
+                    }
                 }
 
                 @Override
                 public void onLongClick(View view, int position) {
 
-                    Toast.makeText(MyNotes.this, "Long press on position :" + position,
-                            Toast.LENGTH_LONG).show();
+//                    Toast.makeText(MyNotes.this, "Long press on position :" + position,
+//                            Toast.LENGTH_LONG).show();
                     onSelectItem();
                     if (!isMultiSelect) {
                         multilist2 = new ArrayList<NotesAdapter>();
@@ -205,21 +208,14 @@ public class MyNotes extends AppCompatActivity implements AlertDialogHelper.Aler
 
     @Override
     public void onBackPressed() {
-        if (status == false) {
-//            toolbarCustom = (Toolbar) findViewById(R.id.toolbarCustom);
-//            toolbar.setVisibility(View.VISIBLE);
-//            toolbarCustom.setVisibility(View.GONE);
-//            status=true;
-            //startActivity(new Intent(this,Remainders.class));
-            //finish();
+        if (status == false)
+        {
             toolbarHide();
             noteRecyclerView.itemList6 = list2;
             noteRecyclerView.selectedlist2.clear();
-//            for(int i=0;i<multilist.size();i++)
-//            {
-//                noteRecyclerView.selectedlist.
-//            }
+            isMultiSelect=false;
             noteRecyclerView.notifyDataSetChanged();
+            //Toast.makeText(this, ""+multilist2.size(), Toast.LENGTH_SHORT).show();
 
         } else {
             super.onBackPressed();
@@ -227,7 +223,8 @@ public class MyNotes extends AppCompatActivity implements AlertDialogHelper.Aler
         }
     }
 
-    public void multiselect(int position) {
+    public void multiselect(int position)
+    {
         if (multilist2.contains(list2.get(position)))
             multilist2.remove(list2.get(position));
         else
@@ -241,7 +238,8 @@ public class MyNotes extends AppCompatActivity implements AlertDialogHelper.Aler
         refreshAdapter();
     }
 
-    public void refreshAdapter() {
+    public void refreshAdapter()
+    {
         noteRecyclerView.selectedlist2 = multilist2;
         noteRecyclerView.itemList6 = list2;
         noteRecyclerView.notifyDataSetChanged();
@@ -249,7 +247,8 @@ public class MyNotes extends AppCompatActivity implements AlertDialogHelper.Aler
 
     @Override
     public void onPositiveClick(int from) {
-        if (from == 1) {
+        if (from == 1)
+        {
             if (multilist2.size() > 0) {
                 for (int i = 0; i <= multilist2.size() - 1; i++) {
                     noteRecyclerView.itemList6.remove(multilist2.get(i));

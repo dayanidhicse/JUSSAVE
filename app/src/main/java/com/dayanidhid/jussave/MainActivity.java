@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
+//import com.dayanidhid.jussave.Backup.drive;
 import com.dayanidhid.jussave.notes.MyNotes;
 import com.dayanidhid.jussave.Reminders.Remainders;
 import com.dayanidhid.jussave.Secrets.Secrets;
@@ -88,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            //startActivity(new Intent(this,drive.class));
             return true;
         }
 
