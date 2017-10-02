@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.dayanidhid.jussave.SignIn_Pin.SetPin">
+
+    <EditText
+        android:id="@+id/pin1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/pin2"
+        android:layout_alignLeft="@+id/pin2"
+        android:layout_alignStart="@+id/pin2"
+        android:layout_marginBottom="72dp"
+        android:ems="10"
+        android:hint="Enter Pin"
+        android:inputType="numberPassword"
+        tools:layout_editor_absoluteX="95dp"
+        tools:layout_editor_absoluteY="109dp" />
+
+    <EditText
+        android:id="@+id/pin2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/submitpin"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="28dp"
+        android:layout_marginLeft="68dp"
+        android:layout_marginStart="68dp"
+        android:ems="10"
+        android:hint="Confirm Pin"
+        android:inputType="numberPassword"
+        tools:layout_editor_absoluteX="95dp"
+        tools:layout_editor_absoluteY="214dp" />
+
+    <Button
+        android:id="@+id/submitpin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/pin2"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/pin2"
+        android:layout_marginBottom="141dp"
+        android:layout_marginEnd="62dp"
+        android:layout_marginRight="62dp"
+        android:text="SET PIN"
+        tools:layout_editor_absoluteX="163dp"
+        tools:layout_editor_absoluteY="335dp" />
+</RelativeLayout>

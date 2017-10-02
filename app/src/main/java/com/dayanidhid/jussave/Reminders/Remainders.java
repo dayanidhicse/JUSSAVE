@@ -1,4 +1,4 @@
-package com.dayanidhid.jussave;
+package com.dayanidhid.jussave.Reminders;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,51 +9,53 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.dayanidhid.jussave.Adapters.AlertDialogHelper;
-import com.dayanidhid.jussave.Adapters.NoteRecyclerView;
-import com.dayanidhid.jussave.Adapters.NotesAdapter;
 import com.dayanidhid.jussave.Adapters.RemAdapter;
 import com.dayanidhid.jussave.Adapters.RemRecyclerView;
+import com.dayanidhid.jussave.MainActivity;
+import com.dayanidhid.jussave.R;
+import com.dayanidhid.jussave.Adapters.RecyclerTouchListener;
+import com.dayanidhid.jussave.Adapters.RecyclerViewAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MyNotes extends AppCompatActivity implements AlertDialogHelper.AlertDialogListener{
+public class Remainders extends AppCompatActivity implements AlertDialogHelper.AlertDialogListener{
     private RecyclerView recyclerView;
     private RecyclerViewAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private Toolbar toolbar, toolbarCustom;
     private TextView count;
-    static public ImageView delete1,share1;
-    private ArrayList<NotesAdapter> list2=new ArrayList<NotesAdapter>();
-    public ArrayList<NotesAdapter> multilist2;
+   static public ImageView delete,share;
+    private ArrayList<RemAdapter> list=new ArrayList<RemAdapter>();
+    public ArrayList<RemAdapter> multilist;
     public StringBuilder stringBuilder;
-    private boolean status=true;
-    private boolean isMultiSelect = false;
-    NoteRecyclerView noteRecyclerView;
+    boolean status=true;
+    boolean isMultiSelect = false;
+    RemRecyclerView remRecyclerView;
     AlertDialogHelper alertDialogHelper;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_notes);
+        setContentView(R.layout.activity_remainders);
+        alertDialogHelper =new AlertDialogHelper(this);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        delete1=(ImageView)findViewById(R.id.delete);
-        share1=(ImageView)findViewById(R.id.share);
+        delete=(ImageView)findViewById(R.id.delete);
+        share=(ImageView)findViewById(R.id.share);
         count=(TextView)findViewById(R.id.count);
         LinearLayout linearLayout = (LinearLayout) findViewById(R.id.empty);
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         setSupportActionBar(toolbar);
-        alertDialogHelper =new AlertDialogHelper(this);
         toolbar.setNavigationIcon(R.drawable.ic_back);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,16 +64,15 @@ public class MyNotes extends AppCompatActivity implements AlertDialogHelper.Aler
                 startActivity(intent);
             }
         });
-        share1.setOnClickListener(new View.OnClickListener()
-        {
+        share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 stringBuilder=new StringBuilder();
-                if(multilist2!=null)
+                if(multilist!=null)
                 {
-                    for(int i=0;i<multilist2.size();i++)
+                    for(int i=0;i<multilist.size();i++)
                     {
-                        stringBuilder.append(""+multilist2.get(i).getTitle()+"\n");
+                     stringBuilder.append(""+multilist.get(i).getName()+"\n");
 
 
                     }
@@ -83,11 +84,14 @@ public class MyNotes extends AppCompatActivity implements AlertDialogHelper.Aler
                 }
             }
         });
-        delete1.setOnClickListener(new View.OnClickListener() {
+        delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 alertDialogHelper.showAlertDialog("","Delete Contact","DELETE","CANCEL",1,false);
+
             }
+
         });
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -105,12 +109,12 @@ public class MyNotes extends AppCompatActivity implements AlertDialogHelper.Aler
         //recyclerView.setHasFixedSize(true);
         // use a linear layout manager
         //mLayoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setLayoutManager(new GridLayoutManager(this,2));
         for(int i=0;i<100;i++)
         {
-            list2.add(new NotesAdapter("Title:"+i,"Type:"+"img"));
+            list.add(new RemAdapter("Test:"+i));
         }
-        if(list2.isEmpty())
+        if(list.isEmpty())
         {
             recyclerView.setVisibility(View.GONE);
             linearLayout.setVisibility(View.VISIBLE);
@@ -119,8 +123,8 @@ public class MyNotes extends AppCompatActivity implements AlertDialogHelper.Aler
             recyclerView.setVisibility(View.VISIBLE);
         }
 
-        noteRecyclerView=new NoteRecyclerView(MyNotes.this,R.layout.row_item,list2,multilist2);
-        recyclerView.setAdapter(noteRecyclerView);
+         remRecyclerView=new RemRecyclerView(this,R.layout.rem_card,list,multilist);
+        recyclerView.setAdapter(remRecyclerView);
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(this,
                 recyclerView, new RecyclerTouchListener.ClickListener() {
             @Override
@@ -131,19 +135,19 @@ public class MyNotes extends AppCompatActivity implements AlertDialogHelper.Aler
                     multiselect(position);
                 }
                 else
-                    Toast.makeText(MyNotes.this, "Single Click on position        :"+position,
-                            Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Remainders.this, "Single Click on position        :"+position,
+                        Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onLongClick(View view, int position)
             {
 
-                Toast.makeText(MyNotes.this, "Long press on position :"+position,
+                Toast.makeText(Remainders.this, "Long press on position :"+position,
                         Toast.LENGTH_LONG).show();
                 onSelectItem();
                 if (!isMultiSelect) {
-                    multilist2=new ArrayList<NotesAdapter>();
+                    multilist=new ArrayList<RemAdapter>();
                     isMultiSelect=true;
                 }
                 multiselect(position);
@@ -194,13 +198,13 @@ public class MyNotes extends AppCompatActivity implements AlertDialogHelper.Aler
             //startActivity(new Intent(this,Remainders.class));
             //finish();
             toolbarHide();
-            noteRecyclerView.itemList6=list2;
-            noteRecyclerView.selectedlist2.clear();
+            remRecyclerView.itemList5=list;
+            remRecyclerView.selectedlist.clear();
 //            for(int i=0;i<multilist.size();i++)
 //            {
-//                noteRecyclerView.selectedlist.
+//                remRecyclerView.selectedlist.
 //            }
-            noteRecyclerView.notifyDataSetChanged();
+            remRecyclerView.notifyDataSetChanged();
 
         }
         else
@@ -211,39 +215,39 @@ public class MyNotes extends AppCompatActivity implements AlertDialogHelper.Aler
     }
     public void multiselect(int position)
     {
-        if (multilist2.contains(list2.get(position)))
-            multilist2.remove(list2.get(position));
+        if (multilist.contains(list.get(position)))
+            multilist.remove(list.get(position));
         else
-            multilist2.add(list2.get(position));
+            multilist.add(list.get(position));
 
-        if (multilist2.size() > 0)
-            count.setText("" + multilist2.size());
+        if (multilist.size() > 0)
+            count.setText("" + multilist.size());
         else
             count.setText("");
 
         refreshAdapter();
     }
 
-    public void refreshAdapter()
-    {   noteRecyclerView.selectedlist2=multilist2;
-        noteRecyclerView.itemList6=list2;
-        noteRecyclerView.notifyDataSetChanged();
-    }
+public void refreshAdapter()
+{   remRecyclerView.selectedlist=multilist;
+    remRecyclerView.itemList5=list;
+    remRecyclerView.notifyDataSetChanged();
+}
     @Override
     public void onPositiveClick(int from)
     {
         if(from==1)
         {
-            if(multilist2.size()>0)
+            if(multilist.size()>0)
             {
-                for(int i=0;i<=multilist2.size()-1;i++)
+                for(int i=0;i<=multilist.size()-1;i++)
                 {
-                    noteRecyclerView.itemList6.remove(multilist2.get(i));
+                    remRecyclerView.itemList5.remove(multilist.get(i));
                 }
-                noteRecyclerView.notifyDataSetChanged();
+                remRecyclerView.notifyDataSetChanged();
                 toolbarHide();
             }
-            multilist2.clear();
+            multilist.clear();
             Toast.makeText(this, "Deleted", Toast.LENGTH_SHORT).show();
         }
 
@@ -260,10 +264,10 @@ public class MyNotes extends AppCompatActivity implements AlertDialogHelper.Aler
     }
     public void toolbarHide()
     {
-        toolbarCustom = (Toolbar) findViewById(R.id.toolbarCustom);
-        toolbar.setVisibility(View.VISIBLE);
-        toolbarCustom.setVisibility(View.GONE);
-        status=true;
+            toolbarCustom = (Toolbar) findViewById(R.id.toolbarCustom);
+            toolbar.setVisibility(View.VISIBLE);
+            toolbarCustom.setVisibility(View.GONE);
+            status=true;
     }
 
 }

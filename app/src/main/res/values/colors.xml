@@ -7,4 +7,6 @@
     <color name="white">#ffffff</color>
     <color name="list_item_selected_state">#979797</color>
     <color name="list_item_normal_state">#FFFFFF</color>
+    <color name="baseBlack">#383838</color>
+
 </resources>

@@ -1,4 +1,4 @@
-package com.dayanidhid.jussave;
+package com.dayanidhid.jussave.Adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -10,7 +10,7 @@ import android.view.View;
  * Created by dayanidhi.d on 20/09/17.
  */
 
-class RecyclerTouchListener implements RecyclerView.OnItemTouchListener{
+public class RecyclerTouchListener implements RecyclerView.OnItemTouchListener{
 
     private ClickListener clicklistener;
     private GestureDetector gestureDetector;

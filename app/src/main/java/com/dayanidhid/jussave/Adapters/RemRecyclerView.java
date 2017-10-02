@@ -10,7 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.dayanidhid.jussave.R;
-import com.dayanidhid.jussave.Remainders;
+import com.dayanidhid.jussave.Reminders.Remainders;
 
 import java.util.ArrayList;
 

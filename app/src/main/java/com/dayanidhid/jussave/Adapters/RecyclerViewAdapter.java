@@ -1,19 +1,16 @@
-package com.dayanidhid.jussave;
+package com.dayanidhid.jussave.Adapters;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import static android.content.ContentValues.TAG;
+import com.dayanidhid.jussave.R;
 
 /**
  * Created by dayanidhi.d on 19/09/17.
@@ -32,7 +29,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         public ViewHolder(View v) {
             super(v);
             layout = v;
-            linearLayout = (LinearLayout) v.findViewById(R.id.textLayout); 
+            linearLayout = (LinearLayout) v.findViewById(R.id.textLayout);
             txtHeader = (TextView) v.findViewById(R.id.title);
             txtFooter = (TextView) v.findViewById(R.id.Type);
             updateImage = (ImageView) v.findViewById(R.id.update);
