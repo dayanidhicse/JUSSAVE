@@ -15,4 +15,8 @@
     <string name="title_activity_remainders">Remainders</string>
     <string name="no_remainders">You have no remainders</string>
     <string name="title_activity_new_remainder">NewRemainder</string>
+    <string name="request_failed">Font request failed with reason code: %1$d</string>
+    <string name="blue">BLUE</string>
+    <string name="red">RED</string>
+    <string name="green">GREEN</string>
 </resources>

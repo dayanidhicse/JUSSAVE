@@ -11,7 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.dayanidhid.jussave.MainActivity;
+import com.dayanidhid.jussave.HomeActivity;
 import com.dayanidhid.jussave.R;
 
 /**
@@ -40,7 +40,7 @@ public class PIN_Login extends AppCompatActivity
                 if(Pin.equals(sharedpreferences.getString("PIN","")))
                 {
 
-                    startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                    startActivity(new Intent(getApplicationContext(),HomeActivity.class));
                     finish();
                 }
                 else

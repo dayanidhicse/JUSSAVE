@@ -4,14 +4,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.dayanidhid.jussave.MainActivity;
+import com.dayanidhid.jussave.HomeActivity;
 import com.dayanidhid.jussave.R;
 
 /**
@@ -49,7 +48,7 @@ public class SetPin extends AppCompatActivity
                     editor.putBoolean("isSecuredLogin",true);
                     editor.putString("LoginMethod","PIN");
                     editor.commit();
-                    startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                    startActivity(new Intent(getApplicationContext(),HomeActivity.class));
 
                 }
                 else if(p1!=p2)

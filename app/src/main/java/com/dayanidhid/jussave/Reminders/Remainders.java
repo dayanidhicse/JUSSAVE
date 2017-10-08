@@ -6,13 +6,12 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -20,13 +19,12 @@ import android.widget.Toast;
 import com.dayanidhid.jussave.Adapters.AlertDialogHelper;
 import com.dayanidhid.jussave.Adapters.RemAdapter;
 import com.dayanidhid.jussave.Adapters.RemRecyclerView;
-import com.dayanidhid.jussave.MainActivity;
+import com.dayanidhid.jussave.HomeActivity;
 import com.dayanidhid.jussave.R;
 import com.dayanidhid.jussave.Adapters.RecyclerTouchListener;
 import com.dayanidhid.jussave.Adapters.RecyclerViewAdapter;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Remainders extends AppCompatActivity implements AlertDialogHelper.AlertDialogListener{
     private RecyclerView recyclerView;
@@ -60,7 +58,7 @@ public class Remainders extends AppCompatActivity implements AlertDialogHelper.A
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
                 startActivity(intent);
             }
         });
@@ -113,13 +111,12 @@ public class Remainders extends AppCompatActivity implements AlertDialogHelper.A
         //recyclerView.setHasFixedSize(true);
         // use a linear layout manager
         //mLayoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(new GridLayoutManager(this,2));
-        for(int i=0;i<100;i++)
-        {
+
+        recyclerView.setLayoutManager(new GridLayoutManager(this,getResources().getConfiguration().orientation==1?2:3));
+        for(int i=0;i<100;i++) {
             list.add(new RemAdapter("Test:"+i));
         }
-        if(list.isEmpty())
-        {
+        if(list.isEmpty()) {
             recyclerView.setVisibility(View.GONE);
             linearLayout.setVisibility(View.VISIBLE);
         } else{
@@ -127,7 +124,7 @@ public class Remainders extends AppCompatActivity implements AlertDialogHelper.A
             recyclerView.setVisibility(View.VISIBLE);
         }
 
-         remRecyclerView=new RemRecyclerView(this,R.layout.rem_card,list,multilist);
+        remRecyclerView=new RemRecyclerView(this,R.layout.rem_card,list,multilist);
         recyclerView.setAdapter(remRecyclerView);
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(this,
                 recyclerView, new RecyclerTouchListener.ClickListener() {

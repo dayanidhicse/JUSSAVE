@@ -20,7 +20,7 @@ import com.dayanidhid.jussave.notes.MyNotes;
 import com.dayanidhid.jussave.Reminders.Remainders;
 import com.dayanidhid.jussave.Secrets.Secrets;
 
-public class MainActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity {
     private static final int CREDENTIALS_RESULT = 4342;
 
 
@@ -61,16 +61,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        
     }
 
     @Override

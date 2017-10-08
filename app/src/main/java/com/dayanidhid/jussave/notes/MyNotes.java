@@ -19,7 +19,7 @@ import com.dayanidhid.jussave.Adapters.AlertDialogHelper;
 import com.dayanidhid.jussave.Adapters.NoteRecyclerView;
 import com.dayanidhid.jussave.Adapters.NotesAdapter;
 import com.dayanidhid.jussave.GetInput.InputNote;
-import com.dayanidhid.jussave.MainActivity;
+import com.dayanidhid.jussave.HomeActivity;
 import com.dayanidhid.jussave.R;
 import com.dayanidhid.jussave.Adapters.RecyclerTouchListener;
 import com.dayanidhid.jussave.Adapters.RecyclerViewAdapter;
@@ -59,7 +59,7 @@ public class MyNotes extends AppCompatActivity implements AlertDialogHelper.Aler
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
                 startActivity(intent);
             }
         });

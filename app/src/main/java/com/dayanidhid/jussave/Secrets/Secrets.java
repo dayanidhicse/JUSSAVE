@@ -14,7 +14,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.dayanidhid.jussave.MainActivity;
+import com.dayanidhid.jussave.HomeActivity;
 import com.dayanidhid.jussave.R;
 import com.dayanidhid.jussave.Adapters.RecyclerTouchListener;
 import com.dayanidhid.jussave.Adapters.RecyclerViewAdapter;
@@ -41,7 +41,7 @@ public class Secrets extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
                 startActivity(intent);
             }
         });
