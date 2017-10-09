@@ -47,6 +47,7 @@ public class MyNotes extends AppCompatActivity implements AlertDialogHelper.Aler
     NoteRecyclerView noteRecyclerView;
     AlertDialogHelper alertDialogHelper;
     String userChoosenTask;
+    static ImageView share;
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -56,8 +57,6 @@ public class MyNotes extends AppCompatActivity implements AlertDialogHelper.Aler
 
     @BindView(R.id.delete)
     ImageView delete1;
-
-    static ImageView share1;
 
     @BindView(R.id.count)
     TextView count;
@@ -78,7 +77,7 @@ public class MyNotes extends AppCompatActivity implements AlertDialogHelper.Aler
         ButterKnife.bind(this);
 
         setSupportActionBar(toolbar);
-        share1 = findViewById(R.id.share);
+        share = findViewById(R.id.share);
         alertDialogHelper = new AlertDialogHelper(this);
         toolbar.setNavigationIcon(ic_back);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -88,7 +87,7 @@ public class MyNotes extends AppCompatActivity implements AlertDialogHelper.Aler
                 startActivity(intent);
             }
         });
-        share1.setOnClickListener(new View.OnClickListener() {
+        share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 stringBuilder = new StringBuilder();
@@ -289,7 +288,7 @@ public class MyNotes extends AppCompatActivity implements AlertDialogHelper.Aler
     }
 
     public static void setShareVisibility(int visibility){
-        share1.setVisibility(visibility);
+        share.setVisibility(visibility);
     }
 
 }
