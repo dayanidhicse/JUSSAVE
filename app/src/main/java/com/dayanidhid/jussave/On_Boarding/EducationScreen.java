@@ -35,12 +35,25 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
+import butterknife.BindInt;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class EducationScreen extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener{
-    ViewPager viewPager;
-    LinearLayout sliderDotspanel;
     private int dotscount;
     private ImageView[] dots;
-    private TextView back, next;
+
+    @BindView(R.id.back)
+    TextView back;
+
+    @BindView(R.id.next)
+    TextView next;
+
+    @BindView(R.id.view_pager)
+    ViewPager viewPager;
+
+    @BindView(R.id.SliderDots)
+    LinearLayout sliderDotspanel;
 
     private static final String TAG = "GoogleActivity";
     private static final int RC_SIGN_IN = 9001;
@@ -54,10 +67,7 @@ public class EducationScreen extends AppCompatActivity implements GoogleApiClien
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_education_screen);
-        viewPager = findViewById(R.id.view_pager);
-        sliderDotspanel = (LinearLayout) findViewById(R.id.SliderDots);
-        back = (TextView) findViewById(R.id.back);
-        next = (TextView) findViewById(R.id.next);
+        ButterKnife.bind(this);
 
         next.setOnClickListener(new View.OnClickListener() {
             @Override

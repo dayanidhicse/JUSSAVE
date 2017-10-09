@@ -52,10 +52,12 @@ public class NoteRecyclerView extends RecyclerView.Adapter<NoteRecyclerView.View
             }
             if(selectedlist2.size()==1)
             {
-               MyNotes.share1.setVisibility(View.VISIBLE);
+                MyNotes.setShareVisibility(View.VISIBLE);
+//               MyNotes.share1.setVisibility(View.VISIBLE);
             }
             else {
-                MyNotes.share1.setVisibility(View.INVISIBLE);
+                MyNotes.setShareVisibility(View.INVISIBLE);
+//                MyNotes.share1.setVisibility(View.INVISIBLE);
             }
         }
 

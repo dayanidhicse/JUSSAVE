@@ -5,10 +5,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,48 +19,54 @@ import com.dayanidhid.jussave.notes.MyNotes;
 import com.dayanidhid.jussave.Reminders.Remainders;
 import com.dayanidhid.jussave.Secrets.Secrets;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 public class HomeActivity extends AppCompatActivity {
     private static final int CREDENTIALS_RESULT = 4342;
 
-
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setContentView(R.layout.activity_home);
+        ButterKnife.bind(this);
         setSupportActionBar(toolbar);
-        FrameLayout frameLayoutMyNote = (FrameLayout) findViewById(R.id.my_note);
-        FrameLayout frameLayoutPassword = (FrameLayout) findViewById(R.id.password);
-        FrameLayout frameLayoutRemainder = (FrameLayout) findViewById(R.id.remainder);
+    }
 
-        frameLayoutMyNote.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), MyNotes.class);
-                startActivity(intent);
-            }
-        });
+    @OnClick(R.id.my_note)
+    public void onMyNoteClick(View view){
+        Intent intent = new Intent(getApplicationContext(), MyNotes.class);
+        startActivity(intent);
+    }
 
-        frameLayoutPassword.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View view) {
-//                Intent intent = new Intent(getApplicationContext(), Secrets.class);
-//                startActivity(intent);
-                checkCredentials();
-            }
-        });
+    @OnClick(R.id.password)
+    public void onSecretsClick(View view) {
+        checkCredentials();
+    }
 
-        frameLayoutRemainder.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), Remainders.class);
-                startActivity(intent);
-            }
-        });
-        
+    @OnClick(R.id.remainder)
+    public void onRemainderClick(View view) {
+        Intent intent = new Intent(getApplicationContext(), Remainders.class);
+        startActivity(intent);
     }
 
     @Override
@@ -73,20 +78,16 @@ public class HomeActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            //startActivity(new Intent(this,drive.class));
+            startActivity(new Intent(this,SettingsActivity.class));
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
-    void checkCredentials()
+   public void checkCredentials()
     {
         KeyguardManager keyguardManager = (KeyguardManager) this.getSystemService(Context.KEYGUARD_SERVICE);
         Intent credentialsIntent = null;
@@ -119,4 +120,5 @@ public class HomeActivity extends AppCompatActivity {
             }
         }
     }
+
 }

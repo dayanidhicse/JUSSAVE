@@ -1,6 +1,7 @@
 package com.dayanidhid.jussave.Reminders;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -23,16 +24,18 @@ import com.dayanidhid.jussave.HomeActivity;
 import com.dayanidhid.jussave.R;
 import com.dayanidhid.jussave.Adapters.RecyclerTouchListener;
 import com.dayanidhid.jussave.Adapters.RecyclerViewAdapter;
+import com.dayanidhid.jussave.SettingsActivity;
 
 import java.util.ArrayList;
 
+import butterknife.BindDrawable;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 public class Remainders extends AppCompatActivity implements AlertDialogHelper.AlertDialogListener{
-    private RecyclerView recyclerView;
     private RecyclerViewAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    private Toolbar toolbar, toolbarCustom;
-    private TextView count;
-   static public ImageView delete,share;
     private ArrayList<RemAdapter> list=new ArrayList<RemAdapter>();
     public ArrayList<RemAdapter> multilist;
     public StringBuilder stringBuilder;
@@ -41,20 +44,38 @@ public class Remainders extends AppCompatActivity implements AlertDialogHelper.A
     RemRecyclerView remRecyclerView;
     AlertDialogHelper alertDialogHelper;
 
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+
+    @BindView(R.id.toolbarCustom)
+    Toolbar toolbarCustom;
+
+    @BindView(R.id.delete)
+    ImageView delete;
+
+    @BindView(R.id.share)
+    ImageView share;
+
+    @BindView(R.id.count)
+    TextView count;
+
+    @BindView(R.id.empty)
+    LinearLayout linearLayout;
+
+    @BindView(R.id.recycler_view)
+    RecyclerView recyclerView;
+
+    @BindDrawable(R.drawable.ic_back)
+    Drawable ic_back;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_remainders);
+        ButterKnife.bind(this);
         alertDialogHelper =new AlertDialogHelper(this);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        delete=(ImageView)findViewById(R.id.delete);
-        share=(ImageView)findViewById(R.id.share);
-        count=(TextView)findViewById(R.id.count);
-        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.empty);
-        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         setSupportActionBar(toolbar);
-        toolbar.setNavigationIcon(R.drawable.ic_back);
+        toolbar.setNavigationIcon(ic_back);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -71,8 +92,6 @@ public class Remainders extends AppCompatActivity implements AlertDialogHelper.A
                     for(int i=0;i<multilist.size();i++)
                     {
                      stringBuilder.append(""+multilist.get(i).getName()+"\n");
-
-
                     }
                     Intent sendIntent = new Intent();
                     sendIntent.setAction(Intent.ACTION_SEND_MULTIPLE);
@@ -95,22 +114,6 @@ public class Remainders extends AppCompatActivity implements AlertDialogHelper.A
             }
 
         });
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-        // use this setting to
-        // improve performance if you know that changes
-        // in content do not change the layout size
-        // of the RecyclerView
-        //recyclerView.setHasFixedSize(true);
-        // use a linear layout manager
-        //mLayoutManager = new LinearLayoutManager(this);
 
         recyclerView.setLayoutManager(new GridLayoutManager(this,getResources().getConfiguration().orientation==1?2:3));
         for(int i=0;i<100;i++) {
@@ -172,6 +175,7 @@ public class Remainders extends AppCompatActivity implements AlertDialogHelper.A
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            startActivity(new Intent(this,SettingsActivity.class));
             return true;
         } else if (id == R.id.action_aboutUs){
             return true;
@@ -190,34 +194,26 @@ public class Remainders extends AppCompatActivity implements AlertDialogHelper.A
     @Override
     public void onBackPressed()
     {
-        if(status==false)
-        {
-//            toolbarCustom = (Toolbar) findViewById(R.id.toolbarCustom);
-//            toolbar.setVisibility(View.VISIBLE);
-//            toolbarCustom.setVisibility(View.GONE);
-//            status=true;
-            //startActivity(new Intent(this,Remainders.class));
-            //finish();
+        if(status==false) {
             toolbarHide();
             remRecyclerView.itemList5=list;
             remRecyclerView.selectedlist.clear();
-//            for(int i=0;i<multilist.size();i++)
-//            {
-//                remRecyclerView.selectedlist.
-//            }
             isMultiSelect=false;
-
             remRecyclerView.notifyDataSetChanged();
 
-        }
-        else
-        {
+        } else {
             super.onBackPressed();
             finish();
         }
     }
-    public void multiselect(int position)
-    {
+
+    @OnClick(R.id.fab)
+    public void onFabClick(View view){
+        Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show();
+    }
+
+    public void multiselect(int position) {
         if (multilist.contains(list.get(position)))
             multilist.remove(list.get(position));
         else
@@ -231,11 +227,11 @@ public class Remainders extends AppCompatActivity implements AlertDialogHelper.A
         refreshAdapter();
     }
 
-public void refreshAdapter()
-{   remRecyclerView.selectedlist=multilist;
-    remRecyclerView.itemList5=list;
-    remRecyclerView.notifyDataSetChanged();
-}
+    public void refreshAdapter() {
+        remRecyclerView.selectedlist=multilist;
+        remRecyclerView.itemList5=list;
+        remRecyclerView.notifyDataSetChanged();
+    }
     @Override
     public void onPositiveClick(int from)
     {
@@ -262,13 +258,10 @@ public void refreshAdapter()
     }
 
     @Override
-    public void onNeutralClick(int from)
-    {
+    public void onNeutralClick(int from) {
 
     }
-    public void toolbarHide()
-    {
-            toolbarCustom = (Toolbar) findViewById(R.id.toolbarCustom);
+    public void toolbarHide() {
             toolbar.setVisibility(View.VISIBLE);
             toolbarCustom.setVisibility(View.GONE);
             status=true;

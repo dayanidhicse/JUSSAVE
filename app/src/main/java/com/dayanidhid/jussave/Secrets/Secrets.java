@@ -1,6 +1,7 @@
 package com.dayanidhid.jussave.Secrets;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -18,40 +19,49 @@ import com.dayanidhid.jussave.HomeActivity;
 import com.dayanidhid.jussave.R;
 import com.dayanidhid.jussave.Adapters.RecyclerTouchListener;
 import com.dayanidhid.jussave.Adapters.RecyclerViewAdapter;
+import com.dayanidhid.jussave.SettingsActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindDrawable;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 public class Secrets extends AppCompatActivity {
-    private RecyclerView recyclerView;
     private RecyclerViewAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    private Toolbar toolbar, toolbarCustom;
+
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+
+    @BindView(R.id.toolbarCustom)
+    Toolbar toolbarCustom;
+
+    @BindView(R.id.empty)
+    LinearLayout linearLayout;
+
+    @BindView(R.id.recycler_view)
+    RecyclerView recyclerView;
+
+    @BindDrawable(R.drawable.ic_back)
+    Drawable ic_back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_secrets);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.empty);
-        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        ButterKnife.bind(this);
+
         setSupportActionBar(toolbar);
 
-        toolbar.setNavigationIcon(R.drawable.ic_back);
+        toolbar.setNavigationIcon(ic_back);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
                 startActivity(intent);
-            }
-        });
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
             }
         });
 
@@ -112,6 +122,7 @@ public class Secrets extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            startActivity(new Intent(this,SettingsActivity.class));
             return true;
         } else if (id == R.id.action_aboutUs){
             return true;
@@ -120,8 +131,13 @@ public class Secrets extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @OnClick(R.id.fab)
+    public void onFabClick(View view){
+        Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show();
+    }
+
     public void onSelectItem(){
-        toolbarCustom = (Toolbar) findViewById(R.id.toolbarCustom);
         toolbar.setVisibility(View.GONE);
         toolbarCustom.setVisibility(View.VISIBLE);
     }
