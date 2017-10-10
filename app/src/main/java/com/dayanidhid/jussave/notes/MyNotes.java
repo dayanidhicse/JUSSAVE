@@ -30,6 +30,7 @@ import android.widget.Toast;
 import com.dayanidhid.jussave.Adapters.AlertDialogHelper;
 import com.dayanidhid.jussave.Adapters.NoteRecyclerView;
 import com.dayanidhid.jussave.Adapters.NotesAdapter;
+import com.dayanidhid.jussave.CameraScreenActivity;
 import com.dayanidhid.jussave.GetInput.InputNote;
 import com.dayanidhid.jussave.HomeActivity;
 import com.dayanidhid.jussave.Permissions;
@@ -212,30 +213,18 @@ public class MyNotes extends AppCompatActivity implements AlertDialogHelper.Aler
         return super.onOptionsItemSelected(item);
     }
 
-    @OnClick(R.id.fab)
-    public void onFabClick(View view){
-//        final CharSequence[] items = {"Type Notes", "Camera", "Gallery"};
-//        AlertDialog.Builder builder = new AlertDialog.Builder(MyNotes.this);
-//        builder.setTitle("Add Notes!");
-//        builder.setItems(items, new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int item) {
-//                if (items[item].equals("Type Notes")) {
-//                    userChoosenTask = "Type Notes";
-//                    startActivity(new Intent(getApplicationContext(), InputNote.class));
-//
-//                } else if (items[item].equals("Camera")) {
-//                    userChoosenTask = "Camera";
-//                } else if (items[item].equals("Gallery")) {
-//                    userChoosenTask = "Gallery";
-//                }
-//            }
-//        });
-//        builder.show();
+    @OnClick(R.id.fabText)
+    public void onFabTextClick(View view){
         permissionStatus = getSharedPreferences("permissionStatus",MODE_PRIVATE);
         Permissions.handlePermission(MyNotes.this,permissionsRequired);
 
     }
+
+    @OnClick(R.id.fabCamera)
+    public void onFabCameraClick(View view){
+        startActivity(new Intent(this,CameraScreenActivity.class));
+    }
+
 
     @Override
     public void onBackPressed() {
@@ -246,8 +235,6 @@ public class MyNotes extends AppCompatActivity implements AlertDialogHelper.Aler
             noteRecyclerView.selectedlist2.clear();
             isMultiSelect=false;
             noteRecyclerView.notifyDataSetChanged();
-            //Toast.makeText(this, ""+multilist2.size(), Toast.LENGTH_SHORT).show();
-
         } else {
             super.onBackPressed();
             finish();
