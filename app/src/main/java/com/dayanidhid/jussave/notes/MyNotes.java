@@ -1,15 +1,24 @@
 package com.dayanidhid.jussave.notes;
 
+import android.Manifest;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Settings;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,6 +32,7 @@ import com.dayanidhid.jussave.Adapters.NoteRecyclerView;
 import com.dayanidhid.jussave.Adapters.NotesAdapter;
 import com.dayanidhid.jussave.GetInput.InputNote;
 import com.dayanidhid.jussave.HomeActivity;
+import com.dayanidhid.jussave.Permissions;
 import com.dayanidhid.jussave.R;
 import com.dayanidhid.jussave.Adapters.RecyclerTouchListener;
 import com.dayanidhid.jussave.Adapters.RecyclerViewAdapter;
@@ -46,6 +56,15 @@ public class MyNotes extends AppCompatActivity implements AlertDialogHelper.Aler
     private boolean isMultiSelect = false;
     NoteRecyclerView noteRecyclerView;
     AlertDialogHelper alertDialogHelper;
+
+    private static final int PERMISSION_CALLBACK_CONSTANT = 100;
+    private static final int REQUEST_PERMISSION_SETTING = 101;
+    String[] permissionsRequired = new String[]{Manifest.permission.CAMERA,
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.ACCESS_COARSE_LOCATION};
+    private SharedPreferences permissionStatus;
+    private boolean sentToSettings = false;
+
     String userChoosenTask;
     static ImageView share;
 
@@ -195,24 +214,27 @@ public class MyNotes extends AppCompatActivity implements AlertDialogHelper.Aler
 
     @OnClick(R.id.fab)
     public void onFabClick(View view){
-        final CharSequence[] items = {"Type Notes", "Camera", "Gallery"};
-        AlertDialog.Builder builder = new AlertDialog.Builder(MyNotes.this);
-        builder.setTitle("Add Notes!");
-        builder.setItems(items, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int item) {
-                if (items[item].equals("Type Notes")) {
-                    userChoosenTask = "Type Notes";
-                    startActivity(new Intent(getApplicationContext(), InputNote.class));
+//        final CharSequence[] items = {"Type Notes", "Camera", "Gallery"};
+//        AlertDialog.Builder builder = new AlertDialog.Builder(MyNotes.this);
+//        builder.setTitle("Add Notes!");
+//        builder.setItems(items, new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int item) {
+//                if (items[item].equals("Type Notes")) {
+//                    userChoosenTask = "Type Notes";
+//                    startActivity(new Intent(getApplicationContext(), InputNote.class));
+//
+//                } else if (items[item].equals("Camera")) {
+//                    userChoosenTask = "Camera";
+//                } else if (items[item].equals("Gallery")) {
+//                    userChoosenTask = "Gallery";
+//                }
+//            }
+//        });
+//        builder.show();
+        permissionStatus = getSharedPreferences("permissionStatus",MODE_PRIVATE);
+        Permissions.handlePermission(MyNotes.this,permissionsRequired);
 
-                } else if (items[item].equals("Camera")) {
-                    userChoosenTask = "Camera";
-                } else if (items[item].equals("Gallery")) {
-                    userChoosenTask = "Gallery";
-                }
-            }
-        });
-        builder.show();
     }
 
     @Override
@@ -230,6 +252,10 @@ public class MyNotes extends AppCompatActivity implements AlertDialogHelper.Aler
             super.onBackPressed();
             finish();
         }
+    }
+
+    private void proceedAfterPermission() {
+        Toast.makeText(getBaseContext(), "We got All Permissions", Toast.LENGTH_LONG).show();
     }
 
     public void multiselect(int position)
@@ -285,6 +311,34 @@ public class MyNotes extends AppCompatActivity implements AlertDialogHelper.Aler
         toolbar.setVisibility(View.VISIBLE);
         toolbarCustom.setVisibility(View.GONE);
         status = true;
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if(requestCode == PERMISSION_CALLBACK_CONSTANT){
+            //check if all permissions are granted
+            boolean allgranted = false;
+            for(int i=0;i<grantResults.length;i++){
+                if(grantResults[i]== PackageManager.PERMISSION_GRANTED){
+                    allgranted = true;
+                } else {
+                    allgranted = false;
+                    break;
+                }
+            }
+            if(allgranted){
+                //Todo: Handle if not necessary
+//                proceedAfterPermission();
+            }else {
+                Boolean permissionNever = Permissions.isPermissionNever(MyNotes.this, permissions);
+                if(permissionNever) {
+                    Permissions.openSettings(MyNotes.this);
+                }else{
+                    Permissions.handlePermission(MyNotes.this,permissions);
+                }
+            }
+        }
     }
 
     public static void setShareVisibility(int visibility){
