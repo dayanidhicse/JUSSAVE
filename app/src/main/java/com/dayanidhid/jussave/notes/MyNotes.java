@@ -38,6 +38,7 @@ import com.dayanidhid.jussave.R;
 import com.dayanidhid.jussave.Adapters.RecyclerTouchListener;
 import com.dayanidhid.jussave.Adapters.RecyclerViewAdapter;
 import com.dayanidhid.jussave.SettingsActivity;
+import com.dayanidhid.jussave.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,8 +62,8 @@ public class MyNotes extends AppCompatActivity implements AlertDialogHelper.Aler
     private static final int PERMISSION_CALLBACK_CONSTANT = 100;
     private static final int REQUEST_PERMISSION_SETTING = 101;
     String[] permissionsRequired = new String[]{Manifest.permission.CAMERA,
-            Manifest.permission.ACCESS_FINE_LOCATION,
-            Manifest.permission.ACCESS_COARSE_LOCATION};
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE};
     private SharedPreferences permissionStatus;
     private boolean sentToSettings = false;
 
@@ -100,6 +101,7 @@ public class MyNotes extends AppCompatActivity implements AlertDialogHelper.Aler
         share = findViewById(R.id.share);
         alertDialogHelper = new AlertDialogHelper(this);
         toolbar.setNavigationIcon(ic_back);
+        new Utils(this);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -197,12 +199,7 @@ public class MyNotes extends AppCompatActivity implements AlertDialogHelper.Aler
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             startActivity(new Intent(this,SettingsActivity.class));
             return true;
@@ -215,14 +212,18 @@ public class MyNotes extends AppCompatActivity implements AlertDialogHelper.Aler
 
     @OnClick(R.id.fabText)
     public void onFabTextClick(View view){
-        permissionStatus = getSharedPreferences("permissionStatus",MODE_PRIVATE);
-        Permissions.handlePermission(MyNotes.this,permissionsRequired);
+        //Todo: Functionality should be added for text input
 
     }
 
     @OnClick(R.id.fabCamera)
     public void onFabCameraClick(View view){
-        startActivity(new Intent(this,CameraScreenActivity.class));
+        if(Permissions.isPermissionCheck(MyNotes.this, permissionsRequired).length > 0) {
+            permissionStatus = getSharedPreferences("permissionStatus",MODE_PRIVATE);
+            Permissions.handlePermission(MyNotes.this,permissionsRequired);
+        } else {
+            startActivity(new Intent(this,CameraScreenActivity.class));
+        }
     }
 
 
