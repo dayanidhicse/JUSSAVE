@@ -152,7 +152,13 @@
                         android:text="@string/birthday_events"/>
 
                 </LinearLayout>
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#000000"/>
             </FrameLayout>
+
         </LinearLayout>
         </LinearLayout>
     </ScrollView>

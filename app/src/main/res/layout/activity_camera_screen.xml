@@ -4,6 +4,12 @@
     android:layout_height="match_parent"
     android:background="#0099cc"
     tools:context="com.dayanidhid.jussave.CameraScreenActivity">
+    <FrameLayout
+        android:id="@+id/camera_preview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        />
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

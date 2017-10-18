@@ -95,10 +95,6 @@ public class Permissions {
         android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(activity);
         LayoutInflater inflater = activity.getLayoutInflater();
         final View dialogView = inflater.inflate(R.layout.permission_dialog, null);
-        LinearLayout linearLayout = dialogView.findViewById(R.id.imageSegment);
-        addImage(dialogView,linearLayout,"FOLDER");
-        addImage(dialogView,linearLayout,"PLUS");
-        addImage(dialogView,linearLayout,"CAMERA");
         builder.setView(dialogView);
         builder.setPositiveButton("Continue", new DialogInterface.OnClickListener() {
             @Override
@@ -114,26 +110,5 @@ public class Permissions {
             }
         });
         builder.show();
-    }
-
-    public static void addImage(View dialogView, LinearLayout linearLayout, String type){
-        ImageView imgPlus = new ImageView(dialogView.getContext());
-        imgPlus.setLayoutParams(new DrawerLayout.LayoutParams(convertDpToPixel(54,dialogView.getContext()), convertDpToPixel(54,dialogView.getContext())));
-        imgPlus.setPadding(convertDpToPixel(0,dialogView.getContext()),convertDpToPixel(0,dialogView.getContext()),convertDpToPixel(16,dialogView.getContext()),convertDpToPixel(0,dialogView.getContext()));
-        if(type == "CAMERA"){
-            imgPlus.setImageResource(
-                    R.drawable.ic_photo_camera_white
-            );
-        } else if(type == "PLUS"){
-            imgPlus.setLayoutParams(new DrawerLayout.LayoutParams(convertDpToPixel(48,dialogView.getContext()), convertDpToPixel(48,dialogView.getContext())));
-            imgPlus.setImageResource(
-                    R.drawable.ic_plus
-            );
-        } else if(type == "FOLDER"){
-            imgPlus.setImageResource(
-                    R.drawable.ic_folder_white
-            );
-        }
-        linearLayout.addView(imgPlus);
     }
 }
